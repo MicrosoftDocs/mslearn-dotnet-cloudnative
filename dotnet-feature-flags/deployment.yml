@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storeimage
+spec:
+  selector: # Define the wrapping strategy
+    matchLabels: # Match all pods with the defined labels
+      app: storeimage # Labels follow the `name: value` template
+  template: # This is the template of the pod inside the deployment
+    metadata:
+      labels:
+        app: storeimage
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      containers:
+        - image: [replace with your ACR name].azurecr.io/storeimage:v1
+          name: storeimage
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: ProductEndpoint
+              value: http://eshop-backend
+            - name: ImagePrefix
+              value: /images
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-website
+spec:
+  type: ClusterIP
+  selector:
+    app: storeimage
+  ports:
+    - port: 80 # SERVICE exposed port
+      name: http # SERVICE port name
+      protocol: TCP # The protocol the SERVICE will listen to
+      targetPort: 8080 # Port to forward to in the POD
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productservice
+spec:
+  selector: # Define the wrapping strategy
+    matchLabels: # Match all pods with the defined labels
+      app: productservice # Labels follow the `name: value` template
+  template: # This is the template of the pod inside the deployment
+    metadata:
+      labels:
+        app: productservice
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      containers:
+        - image: [replace with your ACR name].azurecr.io/productservice:v1
+          name: productservice
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          ports:
+            - containerPort: 8080
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-backend
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: productservice
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eshop-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: / # This defines an ingress rule to route traffic to the front end store service
+        pathType: Prefix
+        backend:
+          service:
+            name: eshop-website
+            port:
+              number: 80
+      - path: /images/ # This defines an ingress rule to route image requests to the backend product service
+        pathType: Prefix
+        backend:
+          service:
+            name: eshop-backend
+            port:
+              number: 80
