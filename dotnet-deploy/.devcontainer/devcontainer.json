@@ -1,0 +1,56 @@
+{
+    "name": "eShopLite",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "IMAGE": "dotnet:8.0"
+        }
+    },
+    "features": {
+	    "ghcr.io/devcontainers/features/docker-from-docker:1": {
+            "version": "20.10"
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {
+            "version": "2"
+        },
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+		"azure-cli": "2.53.0"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.vscode-node-azure-pack",
+                "github.vscode-github-actions",
+                "GitHub.copilot-nightly",
+                "GitHub.vscode-github-actions",
+                "ms-dotnettools.vscode-dotnet-runtime",
+                "ms-dotnettools.csdevkit",
+                "ms-dotnetools.csharp"
+            ]
+        }
+    },
+    "forwardPorts": [
+        32000,
+        32001
+    ],
+    "onCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/library-scripts/dotnet-install.sh --channel 8.0 -quality preview -installdir ${containerWorkspaceFolder}/.dotnet",
+    "postCreateCommand": "dotnet restore",
+    "remoteUser": "vscode",
+    "hostRequirements": {
+        "memory": "16gb",
+        "cpus": 4
+    },
+    "remoteEnv": {
+        "PATH": "${containerWorkspaceFolder}/.dotnet:${containerEnv:PATH}",
+		"DOTNET_MULTILEVEL_LOOKUP": "0",
+		"TARGET": "net8.0"
+    },
+    "portsAttributes": {
+        "32001": {
+            "label": "Back End"
+        },
+        "32000": {
+            "label": "Front End"
+        }
+    }
+}
