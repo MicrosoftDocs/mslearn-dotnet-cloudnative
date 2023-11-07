@@ -32,7 +32,7 @@
         5200,
 	5902
     ],
-    "onCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/mod6/library-scripts/dotnet-install.sh --channel 8.0 -quality preview -installdir ${containerWorkspaceFolder}/.dotnet",
+    "onCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/library-scripts/dotnet-install.sh --channel 8.0 -quality preview -installdir ${containerWorkspaceFolder}/.dotnet",
     "postCreateCommand": "dotnet restore",
     "remoteUser": "vscode",
     "hostRequirements": {
