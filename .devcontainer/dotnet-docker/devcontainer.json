@@ -7,7 +7,7 @@
         }
     },
     "features": {
-	"ghcr.io/devcontainers/features/docker-from-docker:1": {
+	    "ghcr.io/devcontainers/features/docker-from-docker:1": {
             "version": "20.10"
         },
         "ghcr.io/devcontainers/features/github-cli:1": {
@@ -22,7 +22,7 @@
                 "GitHub.copilot-nightly",
                 "GitHub.vscode-github-actions",
                 "ms-dotnettools.vscode-dotnet-runtime",
-		"ms-dotnettools.csdevkit",
+		        "ms-dotnettools.csdevkit",
                 "ms-dotnetools.csharp"
             ]
         }
@@ -31,7 +31,7 @@
         5200,
 	5902
     ],
-    "onCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/library-scripts/dotnet-install.sh --channel 8.0 -quality preview -installdir ${containerWorkspaceFolder}/.dotnet",
+    "onCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/dotnet-docker/library-scripts/dotnet-install.sh --channel 8.0 -quality preview -installdir ${containerWorkspaceFolder}/.dotnet",
     "postCreateCommand": "dotnet restore",
     "remoteUser": "vscode",
     "hostRequirements": {
