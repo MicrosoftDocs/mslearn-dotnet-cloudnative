@@ -1,5 +1,5 @@
 {
-    "name": "eShopLite",
+    "name": "eShopLite - dotnet-docker",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {

@@ -1,5 +1,5 @@
 {
-    "name": "eShopLite",
+    "name": "eShopLite - dotnet-feature-flags",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
