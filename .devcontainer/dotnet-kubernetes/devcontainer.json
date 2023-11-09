@@ -17,10 +17,7 @@
     "customizations": {
         "vscode": {
             "extensions": [
-				"ms-vscode.vscode-node-azure-pack",
-				"github.vscode-github-actions",
 				"GitHub.copilot-nightly",
-				"GitHub.vscode-github-actions",
 				"ms-dotnettools.vscode-dotnet-runtime",
 				"ms-dotnettools.csdevkit",
 				"ms-dotnettools.csharp",
