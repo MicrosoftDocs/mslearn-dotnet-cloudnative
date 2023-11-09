@@ -23,7 +23,7 @@
                 "GitHub.vscode-github-actions",
                 "ms-dotnettools.vscode-dotnet-runtime",
 		        "ms-dotnettools.csdevkit",
-                "ms-dotnetools.csharp"
+                "ms-dotnettools.csharp"
             ]
         }
     },
@@ -47,8 +47,8 @@
         "5200": {
             "label": "Back End"
         },
-	"5902": {
-	    "label": "Front End"
-	}
+        "5902": {
+            "label": "Front End"
+        }
     }
 }
