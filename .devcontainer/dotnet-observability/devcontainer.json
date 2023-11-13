@@ -1,5 +1,5 @@
 {
-    "name": "eShopLite",
+    "name": "eShopLite - dotnet-observability",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
