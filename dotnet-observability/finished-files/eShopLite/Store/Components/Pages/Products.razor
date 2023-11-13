@@ -1,0 +1,89 @@
+﻿@page "/products"
+@using DataEntities
+@using Store.Services
+@inject ProductService ProductService
+@inject IConfiguration Configuration
+@rendermode RenderMode.InteractiveServer
+
+<PageTitle>Products</PageTitle>
+
+<h1>Products</h1>
+
+<p>Here is the current product catalog. Manage the stock here.</p>
+
+@if (products == null)
+{
+  <p><em>Loading...</em></p>
+}
+else
+{
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th />
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var product in products)
+      {
+        <tr>
+          <td><img height="80" width="80" src="@imagePrefix/@product.ImageUrl" /></td>
+          <td>@product.Name</td>
+          <td>@product.Description</td>
+          <td>@product.Price</td>
+          <td>@product.Stock</td>
+          <td>
+            <button class="btn btn-primary" @onclick="() => OpenDialog(product)">Update Stock</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+@if(visible){
+  <ModalDialog Title="@($"{selectedProduct.Name} Stock Updates")" Text="Enter the amount below:" QuantityEntered="@selectedProduct.Stock" OnClose="@OnDialogClose" />
+}
+
+@code {
+  private bool visible = false;
+  private Product selectedProduct;
+  private List<Product>? products;
+  private string imagePrefix = string.Empty;
+
+  private async Task OpenDialog(Product product)
+  {
+    selectedProduct = product;
+    visible=true;
+    StateHasChanged();
+  }
+
+  private async Task OnDialogClose(ModalDialogResponse response)
+  {
+    if (response.Confirm) {
+      await ProductService.UpdateStock(selectedProduct.Id, response.Quantity);
+      products = await ProductService.GetProducts();
+    }
+    visible=false;
+    StateHasChanged();
+  }
+
+  protected override async Task OnInitializedAsync()
+  {
+    imagePrefix = Configuration["ImagePrefix"];
+    products = await ProductService.GetProducts();
+  }
+
+  private async Task UpdateStock(int productId)
+  {
+    await ProductService.UpdateStock(productId, 50);
+    products = await ProductService.GetProducts();
+  }
+
+
+}
