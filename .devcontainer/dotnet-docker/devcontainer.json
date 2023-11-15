@@ -24,13 +24,8 @@
       "postCreateCommand": "dotnet restore",
       "remoteUser": "vscode",
       "hostRequirements": {
-          "memory": "16gb",
+          "memory": "8gb",
           "cpus": 4
-      },
-      "remoteEnv": {
-          "PATH": "${containerWorkspaceFolder}/.dotnet:${containerEnv:PATH}",
-          "DOTNET_MULTILEVEL_LOOKUP": "0",
-          "TARGET": "net8.0"
       },
       "portsAttributes": {
           "32001": {
