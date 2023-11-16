@@ -6,7 +6,7 @@ services:
     image: store
     environment: 
       - ProductEndpoint=http://backend:8080
-      - ImagePrefix=https://orange-fishstick-5444qv4jxq5h77qp-32001.app.github.dev/images
+      - ImagePrefix=[Add your port fowarding codepaces URL or backend:8080 when running locally]/images
     ports:
       - "32000:8080"
     depends_on: 
