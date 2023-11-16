@@ -1,0 +1,17 @@
+version: '3.4'
+
+services: 
+
+  frontend:
+    image: store
+    environment: 
+      - ProductEndpoint=http://backend:8080
+      - ImagePrefix=https://orange-fishstick-5444qv4jxq5h77qp-32001.app.github.dev/images
+    ports:
+      - "32000:8080"
+    depends_on: 
+      - backend
+  backend:
+    image: products
+    ports: 
+      - "32001:8080"
