@@ -6,18 +6,18 @@ services:
     image: storeimage
     build:
       context: .
-      dockerfile: DockerfileStore
+      dockerfile: ./Store/Dockerfile
     environment: 
       - ProductEndpoint=http://backend:8080
-      - ImagePrefix=http://localhost
+      - ImagePrefix=http://localhost/images
     ports:
-      - "5902:8080"
+      - "32000:8080"
     depends_on: 
       - backend
   backend:
     image: productservice
     build: 
       context: .
-      dockerfile: DockerfileProducts
+      dockerfile: ./Products/Dockerfile
     ports: 
-      - "5200:8080"
+      - "32001:8080"
