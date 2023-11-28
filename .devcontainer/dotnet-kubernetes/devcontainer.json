@@ -17,20 +17,17 @@
     "customizations": {
         "vscode": {
             "extensions": [
-				"ms-vscode.vscode-node-azure-pack",
-				"github.vscode-github-actions",
 				"GitHub.copilot-nightly",
-				"GitHub.vscode-github-actions",
 				"ms-dotnettools.vscode-dotnet-runtime",
 				"ms-dotnettools.csdevkit",
-				"ms-dotnetools.csharp",
+				"ms-dotnettools.csharp",
 				"ms-kubernetes-tools.vscode-kubernetes-tools"
 			]
         }
     },
     "forwardPorts": [
         5200,
-	5902
+	    5902
     ],
     "onCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/dotnet-kubernetes/library-scripts/dotnet-install.sh --channel 8.0 -quality preview -installdir ${containerWorkspaceFolder}/.dotnet",
     "postCreateCommand": "dotnet restore",
@@ -48,8 +45,8 @@
         "5200": {
             "label": "Back End"
         },
-	"5902": {
-	    "label": "Front End"
-	}
+        "5902": {
+            "label": "Front End"
+        }
     }
 }
