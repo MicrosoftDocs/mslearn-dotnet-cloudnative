@@ -1,0 +1,62 @@
+version: '3.4'
+
+services: 
+
+  frontend:
+    image: storeimage
+    build:
+      context: .
+      dockerfile: ./eShopLite/Store/Dockerfile
+    environment: 
+      - ProductEndpoint=http://backend:8080
+      - ImagePrefix=http://localhost:32001/images
+      - ZIPKIN_URL=http://zipkin:9411
+      - APPLICATIONINSIGHTS_CONNECTION_STRING=[ADD Your Azure Application Insights Connection String here]
+    ports:
+      - "32000:8080"
+    depends_on: 
+      - backend
+      - prometheus
+      - zipkin
+
+  backend:
+    image: productservice
+    build: 
+      context: .
+      dockerfile: ./eShopLite/Products/Dockerfile
+    environment: 
+      - ZIPKIN_URL=http://zipkin:9411
+      - APPLICATIONINSIGHTS_CONNECTION_STRING=[ADD Your Azure Application Insights Connection String here]
+    ports: 
+      - "32001:8080"
+    depends_on: 
+      - prometheus
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - 9090:9090
+    restart: unless-stopped
+    volumes:
+      - ./prometheus:/etc/prometheus
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
+    volumes:
+      - ./grafana/datasource:/etc/grafana/provisioning/datasources
+

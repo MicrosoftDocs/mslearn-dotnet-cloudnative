@@ -1,0 +1,23 @@
+version: '3.4'
+
+services: 
+
+  frontend:
+    image: storeimage
+    build:
+      context: .
+      dockerfile: ./eShopLite/Store/Dockerfile
+    environment: 
+      - ProductEndpoint=http://backend:8080
+      - ImagePrefix=http://localhost:32001/images
+    ports:
+      - "32000:8080"
+    depends_on: 
+      - backend
+  backend:
+    image: productservice
+    build: 
+      context: .
+      dockerfile: ./eShopLite/Products/Dockerfile
+    ports: 
+      - "32001:8080"

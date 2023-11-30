@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 60s
+
+scrape_configs:
+  - job_name: 'products'
+    static_configs:
+      - targets: ['backend:8080']
+  - job_name: 'store'
+    static_configs:
+      - targets: ['frontend:8080']
