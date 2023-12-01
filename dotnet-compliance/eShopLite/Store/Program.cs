@@ -18,22 +18,12 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Add logging
-#pragma warning disable EXTEXP0002 // HMac redactor is experimental so we need to disable this warning given we are using it.
 builder.Services.AddRedaction(configure =>
 {
-    // For Private Data, we will configure to use the HMac redactor which will allow correlation between log entries.
-    configure.SetHmacRedactor(configureHmac =>
-    {
-        // This key should be kept SECRET! It should be fetched from keyvault or some other secure store.
-        configureHmac.Key = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFh";
-        // Some discriminator to differentiate between different deployments of a service.
-        configureHmac.KeyId = 19;
-    }, new DataClassificationSet(DataClassifications.PrivateDataClassification));
-
-    // For Other Data, we will configure to use a custom redactor which will replace the data with ****.
-    configure.SetRedactor<EShopCustomRedactor>(new DataClassificationSet(DataClassifications.OtherDataClassification));
+    configure.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataClassifications.EUIIDataClassification));
+    configure.SetRedactor<EShopCustomRedactor>(new DataClassificationSet([DataClassifications.OIIDataClassification, DataClassifications.EUPDataClassification]));
 });
-#pragma warning restore EXTEXP0002 // HMac redactor is experimental so we need to disable this warning given we are using it.
+
 
 builder.Services.AddLogging(logging => 
 {

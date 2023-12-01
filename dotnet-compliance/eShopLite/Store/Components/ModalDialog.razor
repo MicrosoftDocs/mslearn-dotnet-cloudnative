@@ -10,13 +10,13 @@
             </div>
             <div class="modal-body">
                 <p>@Text</p>
-                <input type="number" class="form-control" @bind="QuantityEntered" min="0" max="500"/>  
+                <input type="number" class="form-control" @bind="QuantityEntered" min="0" max="10"/>  
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" 
                         @onclick="@ModalCancel">Cancel</button>
                 <button type="button" class="btn btn-primary" 
-                        @onclick=@ModalOk>Update</button>
+                        @onclick=@ModalOk>Buy</button>
             </div>
         </div>
     </div>
