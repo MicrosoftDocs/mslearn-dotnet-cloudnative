@@ -20,8 +20,9 @@ builder.Services.AddRazorComponents()
 // Add logging
 builder.Services.AddRedaction(configure =>
 {
-    configure.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataClassifications.EUIIDataClassification));
-    configure.SetRedactor<EShopCustomRedactor>(new DataClassificationSet([DataClassifications.OIIDataClassification, DataClassifications.EUPDataClassification]));
+    configure.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataClassifications.OIIDataClassification));
+    configure.SetRedactor<EShopCustomRedactor>([new DataClassificationSet(DataClassifications.EUIIDataClassification),
+                                               new DataClassificationSet(DataClassifications.EUPDataClassification)]);
 });
 
 

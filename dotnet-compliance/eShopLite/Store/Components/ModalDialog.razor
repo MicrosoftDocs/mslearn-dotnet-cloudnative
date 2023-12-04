@@ -23,7 +23,7 @@
 </div>
 
 @code {
-    private int QuantityEntered { get; set; }
+    private int QuantityEntered { get; set; } = 1;
     [Parameter] public string Title { get; set; }
     [Parameter] public string Text { get; set; }
     [Parameter] public EventCallback<ModalDialogResponse> OnClose { get; set; }

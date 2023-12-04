@@ -149,6 +149,9 @@ public static class EShopEndpoints
                     var product = await db.Product.FindAsync(order.Products[i].Id);
                     if (product != null)
                     {
+                        // Update the stock for this product
+                        product.Stock -= 1;
+
                         // Replace the product with the one tracked by the DbContext
                         order.Products[i] = product;
                     }
@@ -160,7 +163,7 @@ public static class EShopEndpoints
             return Results.Created($"/api/Order/{order.Id}", order);
         })
         .WithName("CreateOrder")
-        .Produces<Product>(StatusCodes.Status201Created);
+        .Produces<Order>(StatusCodes.Status201Created);
 
 
         group.MapDelete("/{id}", async  (int id, EShopDataContext db) =>

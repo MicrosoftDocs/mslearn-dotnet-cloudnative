@@ -15,7 +15,7 @@
       Here are the current products.
     </div>
     <div class="col text-end">
-      <button class="btn btn-primary" @onclick="() => BuyBasket()">Buy Basket - @order.Products.Count</button>
+      <button class="btn btn-primary" @onclick="() => BuyBasket()">Buy Basket (@order.Products.Count)</button>
     </div>
   </div>
 </div>
@@ -102,13 +102,15 @@ else
 
   private async Task BuyBasket()
   {
-    order.CustomerName = "Test";
-    order.CustomerAddress = "Test";
+    order.CustomerName = "Test Name";
+    order.CustomerAddress = "Test Address";
     var response = await ProductService.CreateOrder(order);
 
     // Order was placed
     if (response) {
       order = new Order { Products = new List<Product>() };
+      products = await ProductService.GetProducts();
+      StateHasChanged();
     }
   }
 

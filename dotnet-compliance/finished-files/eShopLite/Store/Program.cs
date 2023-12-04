@@ -1,10 +1,10 @@
 using Store.Components;
 using Store.Services;
+using Microsoft.Extensions.Compliance.Classification;
+using Microsoft.Extensions.Compliance.Redaction;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddObservability("Store", builder.Configuration);
-
+ 
 builder.Services.AddSingleton<ProductService>();
 builder.Services.AddHttpClient<ProductService>(c =>
 {
@@ -18,7 +18,19 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Add logging
+builder.Services.AddRedaction(configure =>
+{
+    configure.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataClassifications.OIIDataClassification));
+    configure.SetRedactor<EShopCustomRedactor>([new DataClassificationSet(DataClassifications.EUIIDataClassification),
+                                               new DataClassificationSet(DataClassifications.EUPDataClassification)]);
+});
 
+
+builder.Services.AddLogging(logging => 
+{
+    logging.EnableRedaction();
+    logging.AddJsonConsole(); //Enable structure logs on the console to view the redacted data.
+});
 
 var app = builder.Build();
 
@@ -37,7 +49,5 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
-
-app.MapObservability();
 
 app.Run();

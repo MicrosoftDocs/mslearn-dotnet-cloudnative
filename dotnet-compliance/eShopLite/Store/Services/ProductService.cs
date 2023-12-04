@@ -31,10 +31,6 @@ public class ProductService
         };
 
         products = await response.Content.ReadFromJsonAsync(ProductSerializerContext.Default.ListProduct);
-        foreach (var product in products!)
-        {
-          _logger.LogProduct(product);
-        }
         
       }
     }
@@ -62,7 +58,6 @@ public class ProductService
         };
 
         product = await response.Content.ReadFromJsonAsync<Product>(options);
-        _logger.LogProduct(product);
       }
     }
     catch (Exception ex)
@@ -77,6 +72,7 @@ public class ProductService
   {
       try
       {
+          _logger.LogOrders(order);
           var response = await httpClient.PostAsync("/api/Order", new StringContent(JsonSerializer.Serialize(order), Encoding.UTF8, "application/json"));
 
           if (response.IsSuccessStatusCode)
