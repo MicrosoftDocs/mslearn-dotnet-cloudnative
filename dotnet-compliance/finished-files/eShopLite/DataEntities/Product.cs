@@ -6,7 +6,7 @@ namespace DataEntities;
 public class Product
 {
     [Key]
-    [OIIData]
+    [EUPData]
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
@@ -16,14 +16,12 @@ public class Product
     [JsonPropertyName("description")]
     public string? Description { get; set; }
 
-    [OIIData]
     [JsonPropertyName("price")]
     public decimal Price { get; set; }
 
     [JsonPropertyName("imageUrl")]
     public string? ImageUrl { get; set; }
 
-    [OIIData]
     [JsonPropertyName("stock")]
     public int Stock { get; set; }
 

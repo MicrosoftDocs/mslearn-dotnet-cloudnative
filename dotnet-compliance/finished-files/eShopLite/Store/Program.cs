@@ -17,12 +17,11 @@ builder.Services.AddHttpClient<ProductService>(c =>
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Add logging
+// Add redaction
 builder.Services.AddRedaction(configure =>
 {
-    configure.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataClassifications.OIIDataClassification));
-    configure.SetRedactor<EShopCustomRedactor>([new DataClassificationSet(DataClassifications.EUIIDataClassification),
-                                               new DataClassificationSet(DataClassifications.EUPDataClassification)]);
+    configure.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataClassifications.EUPDataClassification));
+    configure.SetRedactor<EShopCustomRedactor>(new DataClassificationSet(DataClassifications.EUIIDataClassification));
 });
 
 

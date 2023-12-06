@@ -9,9 +9,6 @@ public static class DataClassifications
 
     // End User Pseudonymous Information
     public static DataClassification EUPDataClassification {get;} = new DataClassification("EUPDataTaxonomy", "EUPData");
-
-    // Organizational Identifiable Information 
-    public static DataClassification OIIDataClassification {get;} = new DataClassification("OIIDataTaxonomy", "OIIData");
 }
 
 public class EUIIDataAttribute : DataClassificationAttribute
@@ -22,11 +19,6 @@ public class EUIIDataAttribute : DataClassificationAttribute
 public class EUPDataAttribute : DataClassificationAttribute
 {
     public EUPDataAttribute() : base(DataClassifications.EUPDataClassification) { }
-}
-
-public class OIIDataAttribute : DataClassificationAttribute
-{
-    public OIIDataAttribute() : base(DataClassifications.OIIDataClassification) { }
 }
 #endregion
 

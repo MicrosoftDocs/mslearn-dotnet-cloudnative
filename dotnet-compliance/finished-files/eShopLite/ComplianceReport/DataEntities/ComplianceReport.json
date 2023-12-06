@@ -1,0 +1,60 @@
+
+{
+    "Name": "DataEntities",
+    "Types": [
+        {
+            "Name": "DataEntities.Order",
+            "Members": [
+                {
+                    "Name": "CustomerAddress",
+                    "Type": "string",
+                    "File": "C:\\Developer\\mslearn-dotnet-cloudnative\\dotnet-compliance\\eShopLite\\DataEntities\\Order.cs",
+                    "Line": "25",
+                    "Classifications": [
+                        {
+                            "Name": "EUIIData"
+                        }
+                    ]
+                },
+                {
+                    "Name": "CustomerName",
+                    "Type": "string",
+                    "File": "C:\\Developer\\mslearn-dotnet-cloudnative\\dotnet-compliance\\eShopLite\\DataEntities\\Order.cs",
+                    "Line": "21",
+                    "Classifications": [
+                        {
+                            "Name": "EUIIData"
+                        }
+                    ]
+                },
+                {
+                    "Name": "Id",
+                    "Type": "int",
+                    "File": "C:\\Developer\\mslearn-dotnet-cloudnative\\dotnet-compliance\\eShopLite\\DataEntities\\Order.cs",
+                    "Line": "11",
+                    "Classifications": [
+                        {
+                            "Name": "EUPData"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Name": "DataEntities.Product",
+            "Members": [
+                {
+                    "Name": "Id",
+                    "Type": "int",
+                    "File": "C:\\Developer\\mslearn-dotnet-cloudnative\\dotnet-compliance\\eShopLite\\DataEntities\\Product.cs",
+                    "Line": "11",
+                    "Classifications": [
+                        {
+                            "Name": "EUPData"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

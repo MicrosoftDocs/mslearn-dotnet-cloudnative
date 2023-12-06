@@ -1,0 +1,45 @@
+
+{
+    "Name": "Store",
+    "Types": [
+        {
+            "Name": "Store.Services.Log",
+            "Logging Methods": [
+                {
+                    "Name": "LogOrders",
+                    "Parameters": [
+                        {
+                            "Name": "logger",
+                            "Type": "Microsoft.Extensions.Logging.ILogger",
+                            "File": "C:\\Developer\\mslearn-dotnet-cloudnative\\dotnet-compliance\\eShopLite\\Store\\Services\\ProductService.cs",
+                            "Line": "103"
+                        },
+                        {
+                            "Name": "order",
+                            "Type": "DataEntities.Order",
+                            "File": "C:\\Developer\\mslearn-dotnet-cloudnative\\dotnet-compliance\\eShopLite\\Store\\Services\\ProductService.cs",
+                            "Line": "103"
+                        }
+                    ]
+                },
+                {
+                    "Name": "LogProduct",
+                    "Parameters": [
+                        {
+                            "Name": "logger",
+                            "Type": "Microsoft.Extensions.Logging.ILogger",
+                            "File": "C:\\Developer\\mslearn-dotnet-cloudnative\\dotnet-compliance\\eShopLite\\Store\\Services\\ProductService.cs",
+                            "Line": "100"
+                        },
+                        {
+                            "Name": "product",
+                            "Type": "DataEntities.Product",
+                            "File": "C:\\Developer\\mslearn-dotnet-cloudnative\\dotnet-compliance\\eShopLite\\Store\\Services\\ProductService.cs",
+                            "Line": "100"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
