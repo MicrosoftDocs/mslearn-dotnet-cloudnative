@@ -24,7 +24,6 @@ builder.Services.AddRedaction(configure =>
     configure.SetRedactor<EShopCustomRedactor>(new DataClassificationSet(DataClassifications.EUIIDataClassification));
 });
 
-
 builder.Services.AddLogging(logging => 
 {
     logging.EnableRedaction();

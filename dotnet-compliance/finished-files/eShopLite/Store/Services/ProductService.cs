@@ -100,10 +100,7 @@ public class ProductService
 #region Logging Extensions
 public static partial class Log
 {
-    [LoggerMessage(1, LogLevel.Information, "Returned Product: {product}")]
-    public static partial void LogProduct(this ILogger logger, [LogProperties] Product product);
-
-    [LoggerMessage(2, LogLevel.Information, "Placed Order: {order}")]
+    [LoggerMessage(1, LogLevel.Information, "Placed Order: {order}")]
     public static partial void LogOrders(this ILogger logger, [LogProperties] Order order);
 }
 #endregion
