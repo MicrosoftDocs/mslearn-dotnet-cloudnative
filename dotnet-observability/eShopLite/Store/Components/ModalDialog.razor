@@ -1,0 +1,47 @@
+<div class="modal fade show" id="myModal" 
+     style="display:block; background-color: rgba(10,10,10,.8);" 
+     aria-modal="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@Title</h4>
+                <button type="button" class="close" 
+                        @onclick="@ModalCancel">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>@Text</p>
+                <input type="number" class="form-control" @bind="QuantityEntered" min="0" max="500"/>  
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" 
+                        @onclick="@ModalCancel">Cancel</button>
+                <button type="button" class="btn btn-primary" 
+                        @onclick=@ModalOk>Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int QuantityEntered { get; set; }
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string Text { get; set; }
+    [Parameter] public EventCallback<ModalDialogResponse> OnClose { get; set; }
+    private Task ModalCancel()
+    {
+        return OnClose.InvokeAsync(new ModalDialogResponse()
+        {
+          Confirm = false,
+          Quantity = 0
+        });
+    }
+
+    private Task ModalOk()
+    {
+        return OnClose.InvokeAsync(new ModalDialogResponse()
+        {
+          Confirm = true,
+          Quantity = QuantityEntered
+        });
+    }
+}

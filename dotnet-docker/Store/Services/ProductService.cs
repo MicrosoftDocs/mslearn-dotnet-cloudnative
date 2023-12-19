@@ -18,7 +18,7 @@ public class ProductService
         List<Product>? products = null;
 		try
 		{
-	    	var response = await httpClient.GetAsync("/api/Product");
+	    	var response = await httpClient.GetAsync("/api/product");
 	    	var responseText = await response.Content.ReadAsStringAsync();
 
 			_logger.LogInformation($"Http status code: {response.StatusCode}");

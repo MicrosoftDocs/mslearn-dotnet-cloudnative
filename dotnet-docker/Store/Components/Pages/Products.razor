@@ -48,7 +48,7 @@ else
     {
         // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(500);
-        imagePrefix = Configuration["ImagePrefix"];
+        imagePrefix = Configuration["ImagePrefix"]!;
         products = await ProductService.GetProducts();
     }
 
