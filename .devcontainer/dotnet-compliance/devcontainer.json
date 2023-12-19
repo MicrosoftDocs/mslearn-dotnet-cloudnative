@@ -1,0 +1,39 @@
+{
+    "name": "eShopLite - dotnet-compliance",
+    "image": "mcr.microsoft.com/devcontainers/dotnet",
+    "features": {
+      "ghcr.io/devcontainers/features/dotnet:2": { "version": "8.0"},
+      "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+      "ghcr.io/devcontainers/features/azure-cli:1": {},
+      "ghcr.io/devcontainers/features/docker-from-docker:1.3.1": {},
+      "ghcr.io/devcontainers/features/github-cli:1": { "version": "2" }
+    },
+    "customizations": {
+          "vscode": {
+              "extensions": [
+                  "ms-vscode.vscode-node-azure-pack",
+                  "github.vscode-github-actions",
+                  "ms-dotnettools.csdevkit",
+                  "ms-kubernetes-tools.vscode-kubernetes-tools"
+              ]
+          }
+      },
+      "forwardPorts": [
+          32000,
+          32001
+      ],
+      "postCreateCommand": "cd dotnet-compliance/eShopLite && dotnet restore",
+      "remoteUser": "vscode",
+      "hostRequirements": {
+          "memory": "8gb",
+          "cpus": 4
+      },
+      "portsAttributes": {
+          "32001": {
+              "label": "Back End"
+          },
+          "32000": {
+              "label": "Front End"
+          }
+      }
+  }

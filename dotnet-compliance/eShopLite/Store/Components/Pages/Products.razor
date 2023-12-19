@@ -1,0 +1,117 @@
+﻿@page "/products"
+@using DataEntities
+@using Store.Services
+@inject ProductService ProductService
+@inject IConfiguration Configuration
+@rendermode RenderMode.InteractiveServer
+
+<PageTitle>Products</PageTitle>
+
+<h1>Products</h1>
+
+<div class="container px-3 py-4">
+  <div class="row">
+    <div class="col">
+      Here are the current products.
+    </div>
+    <div class="col text-end">
+      <button class="btn btn-primary" @onclick="() => BuyBasket()">Buy Basket (@order.Products.Count)</button>
+    </div>
+  </div>
+</div>
+
+@if (products == null)
+{
+  <p><em>Loading...</em></p>
+}
+else
+{
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th />
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var product in products)
+      {
+        <tr>
+          <td><img height="80" width="80" src="@imagePrefix/@product.ImageUrl" /></td>
+          <td>@product.Name</td>
+          <td>@product.Description</td>
+          <td>@product.Price</td>
+          <td>@product.Stock</td>
+          <td>
+            <button class="btn btn-primary" @onclick="() => OpenDialog(product)">Add</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+@if(visible){
+  <ModalDialog Title="Choose quantity" Text="Enter the number below:" OnClose="@OnDialogClose" />
+}
+
+@code {
+  private bool visible = false;
+  private int selectedProductID;
+  private List<Product>? products;
+  private string imagePrefix = string.Empty;
+
+  private Order order = new Order { Products = new List<Product>() };
+
+  private async Task OpenDialog(Product selectedProduct)
+  {
+    selectedProductID = selectedProduct.Id;
+    visible=true;
+    StateHasChanged();
+  }
+
+  private async Task OnDialogClose(ModalDialogResponse response)
+  {
+    if (response.Confirm) {
+
+      // Get the product from the back end service
+      Product selectedProduct = await ProductService.GetProduct(selectedProductID);
+
+      // Add the number of products selected
+      if (response.Quantity == 1) {
+        order.Products.Add(selectedProduct);
+      } else {
+        for (int i = 0; i < response.Quantity; i++) {
+          order.Products.Add(selectedProduct);
+        }
+      }
+    }
+    visible=false;
+    StateHasChanged();
+  }
+
+  protected override async Task OnInitializedAsync()
+  {
+    imagePrefix = Configuration["ImagePrefix"]!;
+    products = await ProductService.GetProducts();
+  }
+
+  private async Task BuyBasket()
+  {
+    order.CustomerName = "Test Name";
+    order.CustomerAddress = "Test Address";
+    var response = await ProductService.CreateOrder(order);
+
+    // Order was placed
+    if (response) {
+      order = new Order { Products = new List<Product>() };
+      products = await ProductService.GetProducts();
+      StateHasChanged();
+    }
+  }
+
+}

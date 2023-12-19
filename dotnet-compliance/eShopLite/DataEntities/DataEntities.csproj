@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateComplianceReport>true</GenerateComplianceReport>
+    <ComplianceReportOutputPath>$(MSBuildThisFileDirectory)\..\ComplianceReport\DataEntities</ComplianceReportOutputPath>  <!-- Or whichever other path you want -->
+  </PropertyGroup>
+
+</Project>
