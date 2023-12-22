@@ -15,7 +15,7 @@ builder.Services.AddHttpClient<ProductService>(c =>
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Add logging
+// Add observability code here
 
 
 var app = builder.Build();
