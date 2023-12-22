@@ -22,7 +22,7 @@
     <PackageReference Include="Microsoft.Extensions.Compliance.Redaction" Version="8.0.*-*" />
     <PackageReference Include="Microsoft.Extensions.Telemetry" Version="8.0.*-*" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.*-*" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.7.0-*" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.7.*-*" />
   </ItemGroup>
 
   <ItemGroup>
