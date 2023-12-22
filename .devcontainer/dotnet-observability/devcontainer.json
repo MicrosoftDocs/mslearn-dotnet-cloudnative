@@ -19,6 +19,9 @@
           }
       },
       "forwardPorts": [
+          3000,
+          9090,
+          9411,
           32000,
           32001
       ],
@@ -29,6 +32,15 @@
           "cpus": 4
       },
       "portsAttributes": {
+          "3000": {
+              "label": "Grafana"
+          },
+          "9090": {
+              "label": "Prometheus"
+          },
+          "9411": {
+              "label": "Zipkin"
+          },
           "32001": {
               "label": "Back End"
           },
