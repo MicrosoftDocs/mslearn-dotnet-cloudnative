@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>preview</LangVersion>
-    <GenerateComplianceReport>true</GenerateComplianceReport>
-    <ComplianceReportOutputPath>$(MSBuildThisFileDirectory)\..\ComplianceReport\Store</ComplianceReportOutputPath>  <!-- Or whichever other path you want -->
+
+    <!-- Add Compliance Report Here -->
   </PropertyGroup>
 
   <ItemGroup>
