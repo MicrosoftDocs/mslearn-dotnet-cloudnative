@@ -1,22 +1,16 @@
 using Store.Components;
 using Store.Services;
-using Microsoft.FeatureManagement;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.AzureAppConfiguration;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Retrieve the connection string
-string connectionString = builder.Configuration.GetConnectionString("AppConfig");
+
 
 // Load configuration from Azure App Configuration
-builder.Configuration.AddAzureAppConfiguration(options => {
-  options.Connect(connectionString)
-    .UseFeatureFlags();
-});
 
-builder.Services.AddFeatureManagement();
-builder.Services.AddAzureAppConfiguration();
+
+// Register the Feature Management library's services
 
 builder.Services.AddSingleton<ProductService>();
 builder.Services.AddHttpClient<ProductService>(c =>
@@ -48,6 +42,7 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.UseAzureAppConfiguration();
+
+// Add the App Configuration middleware
 
 app.Run();
