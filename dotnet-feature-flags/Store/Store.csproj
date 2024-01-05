@@ -12,10 +12,4 @@
     <ProjectReference Include="..\DataEntities\DataEntities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="6.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="6.1.1" />
-    <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="3.0.0" />
-  </ItemGroup>
-
 </Project>
