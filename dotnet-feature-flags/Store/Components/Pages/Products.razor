@@ -8,8 +8,6 @@
 @inject ILogger<Products> Logger
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
-@using Microsoft.FeatureManagement
-@inject IFeatureManager FeatureManager
 
 <PageTitle>Products</PageTitle>
 
@@ -26,13 +24,6 @@ else if (products.Count == 0) {
 }
 else
 {
-    if (saleOn)
-    {
-    <div class="alert alert-success" role="alert">
-      Our sale is now on.
-    </div>
-    }
-
     <table class="table">
         <thead>
             <tr>
@@ -49,14 +40,7 @@ else
                     <td><img height="80" width="80" src="@imagePrefix/@product.ImageUrl" /></td>
                     <td>@product.Name</td>
                     <td>@product.Description</td>
-                    <td>
-                      @if (saleOn) {
-                        <strike>@(product.Price)</strike><br>
-                        @((product.Price * discountPercentage).ToString("#.##"))
-                      } else {
-                        @product.Price
-                      }
-                    </td>
+                    <td>@product.Price </td>
                 </tr>
             }
         </tbody>
@@ -66,8 +50,6 @@ else
 @code {
     private List<Product>? products;
     private string imagePrefix = string.Empty;
-    private bool saleOn = false;
-    private decimal discountPercentage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -75,11 +57,6 @@ else
         await Task.Delay(500);
         imagePrefix = Configuration["ImagePrefix"];
         products = await ProductService.GetProducts();
-
-        saleOn = await FeatureManager.IsEnabledAsync("SeasonalDiscount");
-        if (saleOn) {
-          discountPercentage = Convert.ToDecimal(Configuration.GetSection("eShopLite__Store__DiscountPercent").Value);
-        }
     }
 
 }
