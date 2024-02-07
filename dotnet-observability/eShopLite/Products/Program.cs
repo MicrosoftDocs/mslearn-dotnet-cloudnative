@@ -1,4 +1,4 @@
-vusing Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Products.Data;
 using Products.Endpoints;
 
