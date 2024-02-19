@@ -32,7 +32,7 @@ else
     @foreach (var product in products)
       {
         <tr>
-          <td><img height="80" width="80" src="@imagePrefix/@product.ImageUrl" /></td>
+          <td><img height="80" width="80" src="https://raw.githubusercontent.com/MicrosoftDocs/mslearn-dotnet-cloudnative/main/dotnet-docker/Products/wwwroot/images/@product.ImageUrl" /></td>
           <td>@product.Name</td>
           <td>@product.Description</td>
           <td>@product.Price</td>
@@ -53,7 +53,6 @@ else
 @code {
   private bool visible = false;
   private int selectedProductID;
-  private List<Product>? products;
   private string imagePrefix = string.Empty;
 
   private async Task OpenDialog(Product selectedProduct)
@@ -75,7 +74,6 @@ else
 
   protected override async Task OnInitializedAsync()
   {
-    imagePrefix = Configuration["ImagePrefix"];
     products = await ProductService.GetProducts();
   }
 
