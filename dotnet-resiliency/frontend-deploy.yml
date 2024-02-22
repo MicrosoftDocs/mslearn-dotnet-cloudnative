@@ -20,8 +20,6 @@ spec:
           value: http://*:80
         - name: ProductEndpoint
           value: http://productsbackend
-        - name: ImagePrefix
-          value: http://localhost/images
   selector:
     matchLabels:
       app: storefrontend
