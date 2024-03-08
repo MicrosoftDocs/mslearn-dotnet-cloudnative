@@ -3,22 +3,15 @@ version: '3.4'
 services: 
 
   frontend:
-    image: storeimage
-    build:
-      context: .
-      dockerfile: DockerfileStore
+    image: store:latest
     environment: 
       - ProductEndpoint=http://backend:8080
-      - ImagePrefix=http://localhost:32001/images
       - ConnectionStrings:AppConfig=[PASTE CONNECTION STRING HERE]
     ports:
       - "32000:8080"
     depends_on: 
       - backend
   backend:
-    image: productservice
-    build: 
-      context: .
-      dockerfile: DockerfileProducts
+    image: products:latest
     ports: 
       - "32001:8080"
