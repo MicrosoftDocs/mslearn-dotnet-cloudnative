@@ -21,7 +21,7 @@
         32000,
         32001
     ],
-    "postCreateCommand": "dotnet restore",
+    "postCreateCommand": "cd dotnet-docker && dotnet restore",
     "remoteUser": "vscode",
     "hostRequirements": {
         "memory": "8gb",
