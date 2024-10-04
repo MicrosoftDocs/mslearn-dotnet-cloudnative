@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: ctest 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ctest
+  template:
+    metadata:
+      labels:
+        app: ctest 
+    spec:
+      containers:
+        - name: ctest 
+          image: rogerchenacr.azurecr.io/ctest
+          ports:
+          - containerPort: 80
