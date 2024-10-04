@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storefrontend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: storefrontend
+    spec:
+      containers:
+      - name: storefrontend
+        image: chenqi830521/storeimage:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://*:80
+        - name: ProductEndpoint
+          value: http://productsbackend
+  selector:
+    matchLabels:
+      app: storefrontend
+---
