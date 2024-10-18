@@ -8,7 +8,7 @@
 **/.toolstarget
 **/.vs
 **/.vscode
-**/*.*proj.user
+**/*proj.user
 **/*.dbmdl
 **/*.jfm
 **/azds.yaml
