@@ -11,4 +11,13 @@ This repo contains the sample code for all the exercises in the [cloud native le
 5. Select the devcontainer for the module you want.
    
    <img src="choose-dev-container.png" width="800" alt="A screenshot showing the devcontainer." />
-   
+
+## Running Locally?
+
+Make sure to update the appsettings.json for the database to:
+
+```json
+"ProductsContext": "Data Source=Database.db"
+```
+
+It has been configured by default for use in a codespace.
