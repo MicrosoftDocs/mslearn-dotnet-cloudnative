@@ -24,8 +24,8 @@
 
 @code {
     [Parameter] public int QuantityEntered { get; set; }
-    [Parameter] public string Title { get; set; }
-    [Parameter] public string Text { get; set; }
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public string? Text { get; set; }
     [Parameter] public EventCallback<ModalDialogResponse> OnClose { get; set; }
     private Task ModalCancel()
     {
